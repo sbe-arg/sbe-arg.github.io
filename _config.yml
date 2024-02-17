@@ -1,0 +1,22 @@
+# source
+remote_theme: sbe-arg/minimal
+plugins:
+  - jekyll-remote-theme
+  - jemoji
+
+# details
+title: Santiago Bernhardt
+description: SBE Consulting
+
+# tracking
+google_analytics: G-GTCGVBR42C
+
+# custom
+linkedin: https://www.linkedin.com/in/santiagobernhardt
+mail: santiago@bernhardt.ltd
+
+# flags
+color-scheme: auto
+show_downloads: false
+is_project_page: false
+is_user_page: false
