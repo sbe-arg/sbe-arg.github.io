@@ -4,7 +4,7 @@ layout: default
 
 **I am a fractional Platform Automation and Security Lead helping businesses to securely and reliably build, understand, deploy and maintain complex technology systems.**
 
-I normally work a few hours per week with each client in an ongoing fashion, providing a consistent and reliable source of expertise and guidance. This allows me to understand the business and its needs, and to provide the best possible advice and support. I also work on a project basis, depending on the client's needs. 
+I prioritize building meaningful relationships with my clients by offering flexible scheduling tailored to their needs. Through collaborative agreements, we establish dedicated blocks of time each week, ensuring a reliable source of expertise and guidance. This  fosters a deeper understanding of business dynamics, enabling personalized advice and assistance. Additionally, I adapt to project-based work structures when necessary, guaranteeing that we align seamlessly with evolving requirements.
 
 ## SERVICES
 
