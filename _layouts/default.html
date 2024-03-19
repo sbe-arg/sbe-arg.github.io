@@ -24,8 +24,8 @@
     <div class="wrapper">
       <header>
         <h1><a href="{{ "/" | absolute_url }}">{{ site.title }} <i class="fa fa-check-circle-o" aria-hidden="true"></i></a></h1>
-        {% if site.logo %}
-          <img src="{{ site.logo | relative_url }}" alt="Logo" />
+        {% if site.avatar %}
+          <img src="{{ site.avatar | relative_url }}" alt="{{ site.title }}" />
         {% endif %}
         <p>{{ site.description }}</p>
         <p><a target="_blank" href="{{ site.linkedin }}" rel="noopener noreferrer"><i class="fa fa-linkedin" aria-hidden="true"></i>  Connect on LinkedIn</a></p>
