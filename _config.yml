@@ -1,0 +1,25 @@
+# source
+remote_theme: sbe-arg/minimal
+plugins:
+  - jekyll-remote-theme
+  - jemoji
+
+# details
+title: Santiago Bernhardt
+description: fractional technology consulting
+
+# tracking
+google_analytics: G-GTCGVBR42C
+
+# custom
+avatar: /assets/img/avatar.jpg
+linkedin: https://www.linkedin.com/in/santiagobernhardt
+mail: santiago@bernhardt.ltd
+bookatime: https://cloud.bernhardt.ltd/apps/calendar/appointment/n9FN6Yq8fzAg
+resume: https://cloud.bernhardt.ltd/s/n57nwDdXdLsXzmG
+
+# flags
+color-scheme: auto
+show_downloads: false
+is_project_page: false
+is_user_page: false
