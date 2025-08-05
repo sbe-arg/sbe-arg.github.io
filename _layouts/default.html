@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <!-- Set default consent state for Consent Mode -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      
+      // Default consent state - required for Google Consent Mode
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'wait_for_update': 500
+      });
+    </script>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{ site.google_tag_manager }}');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="author" content="{{ site.name }}">
+    <meta name="theme-color" content="#157878">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>{{ site.title }} - {{ site.description }}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="{{ site.keywords }}">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="{{ site.title }} - {{ site.description }}">
+    <meta property="og:description" content="{{ site.seo_description | default: site.description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    {% if site.avatar %}
+    <meta property="og:image" content="{{ site.url }}{{ site.avatar }}">
+    <meta property="og:image:alt" content="{{ site.name }} - {{ site.description }}">
+    {% endif %}
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ site.title }} - {{ site.description }}">
+    <meta name="twitter:description" content="{{ site.seo_description | default: site.description }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{{ '/assets/img/favicon.ico' | relative_url }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ '/assets/img/favicon.ico' | relative_url }}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+
+{% seo title=false %}
+
+    {%if site.color-scheme %}
+    <link rel="stylesheet" href="{{ "/assets/css/colors-ColorScheme.css?v=" | replace: "ColorScheme", site.color-scheme | append: site.github.build_revision | relative_url }}">
+    {% else %}
+    <link rel="stylesheet" href="{{ "/assets/css/colors-auto.css?v=" | append: site.github.build_revision | relative_url }}">
+    {% endif %}
+    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
+    {% include head-custom.html %}
+
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <!-- Cookie Consent Banner -->
+    <div id="cookieConsentBanner" class="cookie-consent-banner" style="display: none;">
+      <div class="cookie-consent-content">
+        <h3>GA Cookie Consent</h3>
+        <p>Allow Google Analytics on this site.</p>
+        <div class="cookie-consent-buttons">
+          <button id="rejectCookies" class="cookie-btn cookie-reject">Reject</button>
+          <button id="acceptCookies" class="cookie-btn cookie-accept">Accept</button>
+        </div>
+      </div>
+    </div>
+    <!-- Dark mode toggle -->
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round"></div>
+      </label>
+      <em><span class="toggle-text"><i class="fas fa-moon"></i> / <i class="fas fa-sun"></i></span></em>
+    </div>
+    
+    <!-- Font size controls -->
+    <div class="font-control-wrapper">
+      <button aria-label="Decrease font size" class="font-size-btn" id="decreaseFont"><i class="fas fa-minus"></i></button>
+      <button aria-label="Reset font size" class="font-size-btn" id="resetFont"><i class="fas fa-font"></i></button>
+      <button aria-label="Increase font size" class="font-size-btn" id="increaseFont"><i class="fas fa-plus"></i></button>
+    </div>
+
+    <div class="wrapper">
+      <header>
+        <div class="name-container">
+          <h1><a href="{{ "/" | absolute_url }}">{{ site.name }} <i class="fas fa-check-circle" aria-hidden="true"></i></a></h1>
+        </div>
+        {% if site.avatar %}
+          <div class="profile-container">
+            <img class="profile-image" src="{{ site.avatar | relative_url }}" alt="{{ site.title }}" />
+          </div>
+        {% endif %}
+        
+        {% if site.description %}
+          <div class="tagline">
+            {{ site.description }}
+          </div>
+        {% endif %}
+        
+        <div class="contact-links">
+          <p><a target="_blank" href="{{ site.linkedin }}" rel="noopener noreferrer" aria-label="Connect on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i>  Connect on LinkedIn</a></p>
+          <p><a target="_blank" href="mailto:{{ site.mail }}" rel="noopener noreferrer" aria-label="Contact via Email"><i class="fas fa-envelope" aria-hidden="true"></i>  Contact via Email</a></p>
+          <p><a target="_blank" href="{{ site.bookatime }}" rel="noopener noreferrer" aria-label="Book a time"><i class="fas fa-calendar-alt" aria-hidden="true"></i>  Book a time</a></p>
+        </div>
+      </header>
+      <section>
+      {{ content }}
+      
+      {% if site.clients %}
+      <div class="clients-section">
+        <h3 class="clients-heading">Trusted By</h3>
+        <div class="client-logos">
+          {% for client in site.clients %}
+            <a href="{{ client.url }}" target="_blank" rel="noopener noreferrer" class="client-link" title="{{ client.name }}">
+              {{ client.name }}
+            </a>
+            {% unless forloop.last %}
+            <span class="client-separator">•</span>
+            {% endunless %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+      </section>
+      
+      <footer>
+        <p><small>&copy; {% if site.copyright_year %}{{ site.copyright_year }}{% else %}{{ 'now' | date: "%Y" }}{% endif %} {{ site.title }}. All rights reserved.</small></p>
+        <p><small>
+          Hosted on GitHub Pages
+          {% if site.github.owner_url %} • 
+          <a target="_blank" href="{{ site.github.owner_url }}" rel="noopener noreferrer" aria-label="View GitHub profile">
+            <i class="fab fa-github" aria-hidden="true"></i> GitHub
+          </a>
+          {% endif %}
+        </small></p>
+      </footer>
+    </div>
+    
+    <!-- Schema.org structured data for better SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "{{ site.name }}",
+      "givenName": "{{ site.given_name }}",
+      "familyName": "{{ site.family_name }}",
+      "url": "{{ site.url }}",
+      "description": "{{ site.seo_description | default: site.description }}",
+      "image": "{{ site.url }}{{ site.avatar }}",
+      "jobTitle": "{{ site.job_title }}",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "{{ site.title }}",
+        "url": "{{ site.url }}"
+      },
+      "knowsAbout": {{ site.expertise | jsonify }},
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "{{ site.mail }}",
+        "contactType": "Business Inquiries"
+      },
+      "sameAs": [
+        "{{ site.linkedin }}"{% if site.github.owner_url %},
+        "{{ site.github.owner_url }}"{% endif %}
+      ]
+    }
+    </script>
+    
+    <!-- Professional Service Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "{{ site.title }} - {{ site.description }}",
+      "legalName": "{{ site.title }}",
+      "description": "{{ site.seo_description | default: site.description }}",
+      "url": "{{ site.url }}",
+      "founder": {
+        "@type": "Person",
+        "name": "{{ site.name }}"
+      },
+      "foundingDate": {{ site.fundingdate }},
+      "priceRange": "$$$$",
+      "knowsAbout": {{ site.expertise | jsonify }},
+      "makesOffer": [
+        {% for service in site.services %}
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "{{ service.name }}",
+            "description": "{{ service.description }}"
+          }
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      "sameAs": [
+        "{{ site.linkedin }}"{% if site.github.owner_url %},
+        "{{ site.github.owner_url }}"{% endif %}
+      ]
+    }
+    </script>
+    
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "{{ site.title }}",
+          "item": "{{ site.url }}"
+        }
+      ]
+    }
+    </script>
+    
+    <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
+    
+    <!-- Dark mode toggle script -->
+    <script>
+      const toggleSwitch = document.querySelector('#checkbox');
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const currentTheme = localStorage.getItem('theme');
+      
+      // If user has previously selected a preference, use that
+      if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        if (currentTheme === 'dark') {
+          toggleSwitch.checked = true;
+        }
+      } 
+      // Otherwise, use the browser preference
+      else if (prefersDarkScheme.matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        toggleSwitch.checked = true;
+      }
+      
+      function switchTheme(e) {
+        if (e.target.checked) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+        }
+      }
+      
+      // Listen for changes to the user's OS preference
+      prefersDarkScheme.addEventListener('change', function(e) {
+        // Only apply if user hasn't manually set a preference
+        if (!localStorage.getItem('theme')) {
+          if (e.matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            toggleSwitch.checked = true;
+          } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            toggleSwitch.checked = false;
+          }
+        }
+      });
+      
+      toggleSwitch.addEventListener('change', switchTheme, false);
+    </script>
+    
+    <!-- Add a way to reset to system preference - supports both double-click and touch -->
+    <script>
+      // Function to reset to system preference
+      function resetToSystemPreference() {
+        localStorage.removeItem('theme');
+        document.documentElement.removeAttribute('data-theme');
+        toggleSwitch.checked = prefersDarkScheme.matches;
+        
+        // Show feedback to user - especially helpful on mobile
+        const toggleText = document.querySelector('.toggle-text');
+        const originalHTML = toggleText.innerHTML;
+        toggleText.innerHTML = '<i class="fas fa-check"></i> Reset';
+        
+        setTimeout(() => {
+          toggleText.innerHTML = originalHTML;
+        }, 1500);
+      }
+      
+      // Double-click on the theme toggle text to reset to system preference
+      document.querySelector('.toggle-text').addEventListener('dblclick', resetToSystemPreference);
+      
+      // For mobile: add long press detection (700ms)
+      let pressTimer;
+      const toggleTextElement = document.querySelector('.toggle-text');
+      
+      toggleTextElement.addEventListener('touchstart', function() {
+        pressTimer = window.setTimeout(resetToSystemPreference, 700);
+      });
+      
+      toggleTextElement.addEventListener('touchend', function() {
+        clearTimeout(pressTimer);
+      });
+      
+      // Cancel the timer if touch moves (scroll gesture)
+      toggleTextElement.addEventListener('touchmove', function() {
+        clearTimeout(pressTimer);
+      });
+    </script>
+    
+    <!-- Add font size control functionality -->
+    <script>
+      // Font size adjustment
+      const decreaseBtn = document.getElementById('decreaseFont');
+      const resetBtn = document.getElementById('resetFont');
+      const increaseBtn = document.getElementById('increaseFont');
+      
+      // Default font size - will be used as base value
+      const defaultFontSize = parseFloat(getComputedStyle(document.body).fontSize);
+      let currentSize = localStorage.getItem('fontSize') ? parseFloat(localStorage.getItem('fontSize')) : defaultFontSize;
+      
+      // Initialize font size from saved preference
+      if (localStorage.getItem('fontSize')) {
+        document.body.style.fontSize = currentSize + 'px';
+      }
+      
+      function changeFontSize(direction) {
+        // Get current size
+        currentSize = parseFloat(getComputedStyle(document.body).fontSize);
+        
+        if (direction === 'increase') {
+          currentSize *= 1.1; // Increase by 10%
+        } else if (direction === 'decrease') {
+          currentSize *= 0.9; // Decrease by 10%
+        } else {
+          // Reset to default
+          currentSize = defaultFontSize;
+        }
+        
+        // Apply new size and save to localStorage
+        document.body.style.fontSize = currentSize + 'px';
+        localStorage.setItem('fontSize', currentSize);
+        
+        // Show visual feedback
+        showFeedback(direction);
+      }
+      
+      function showFeedback(action) {
+        const section = document.querySelector('section');
+        const feedback = document.createElement('div');
+        feedback.className = 'font-feedback';
+        
+        let message = '';
+        if (action === 'increase') {
+          message = 'Font size increased';
+        } else if (action === 'decrease') {
+          message = 'Font size decreased';
+        } else {
+          message = 'Font size reset';
+        }
+        
+        feedback.textContent = message;
+        section.appendChild(feedback);
+        
+        // Fade out and remove after a delay
+        setTimeout(() => {
+          feedback.style.opacity = '0';
+          setTimeout(() => {
+            section.removeChild(feedback);
+          }, 500);
+        }, 1500);
+      }
+      
+      decreaseBtn.addEventListener('click', () => changeFontSize('decrease'));
+      resetBtn.addEventListener('click', () => changeFontSize('reset'));
+      increaseBtn.addEventListener('click', () => changeFontSize('increase'));
+    </script>
+    
+    <!-- Add smooth scrolling -->
+    <script>
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+    
+    <!-- Cookie Consent Management Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Check if user has already made a choice
+        const consentState = localStorage.getItem('cookieConsent');
+        const banner = document.getElementById('cookieConsentBanner');
+        
+        // If no preference is stored, show the banner
+        if (!consentState) {
+          banner.style.display = 'block';
+        } else {
+          // Apply previously saved consent
+          updateConsentState(consentState === 'granted');
+        }
+        
+        // Handle Accept button
+        document.getElementById('acceptCookies').addEventListener('click', function() {
+          updateConsentState(true);
+          hideBanner();
+          localStorage.setItem('cookieConsent', 'granted');
+        });
+        
+        // Handle Reject button
+        document.getElementById('rejectCookies').addEventListener('click', function() {
+          updateConsentState(false);
+          hideBanner();
+          localStorage.setItem('cookieConsent', 'denied');
+        });
+        
+        function updateConsentState(granted) {
+          // Update Google Consent Mode settings
+          gtag('consent', 'update', {
+            'analytics_storage': granted ? 'granted' : 'denied'
+          });
+        }
+        
+        function hideBanner() {
+          banner.style.display = 'none';
+        }
+      });
+    </script>
+  </body>
+</html>

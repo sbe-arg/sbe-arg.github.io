@@ -1,0 +1,74 @@
+# source
+remote_theme: sbe-arg/minimal
+plugins:
+  - jekyll-remote-theme
+  - jemoji
+
+# details
+name: Santiago Bernhardt
+given_name: Santiago
+family_name: Bernhardt
+title: Bernhardt
+description: Fractional Technology Consulting
+seo_description: "Technology consulting services specializing in security, compliance, and scalable cloud infrastructure for growing companies. Helping businesses build secure, compliant platforms without the cost of full-time specialists."
+keywords: "technology consulting, security compliance, cloud infrastructure, DevOps consulting, SOC2 compliance, ISO 27001, HIPAA, GDPR, technical strategy, Santiago Bernhardt, cloud architecture, infrastructure as code, DevSecOps, site reliability engineering"
+job_title: "Technology Consultant"
+fundingdate: 2022
+
+# tracking
+google_analytics: G-GTCGVBR42C
+google_tag_manager: G-GTCGVBR42C
+
+# custom
+avatar: /assets/img/avatar.jpg
+linkedin: https://www.linkedin.com/in/santiagobernhardt
+mail: santiago@bernhardt.ltd
+bookatime: https://cloud.bernhardt.ltd/index.php/apps/calendar/appointment/XKn92JBK9EbD
+
+# professional expertise
+expertise:
+  - Security Compliance
+  - Cloud Infrastructure
+  - DevOps
+  - SOC2
+  - ISO 27001
+  - HIPAA
+  - GDPR
+  - DevSecOps
+  - Site Reliability Engineering
+  - AWS
+  - Azure
+  - Software Architecture
+  - Technical Leadership
+
+# professional services
+services:
+  - name: Security & Compliance Consulting
+    description: GDPR, SOC2, ISO 27001, and other frameworks implementation
+  - name: Cloud Infrastructure Optimization
+    description: Secure and scalable cloud architecture design
+  - name: Technical Strategy
+    description: Technology roadmap and implementation planning
+
+# flags
+color-scheme: auto
+show_downloads: false
+is_project_page: false
+is_user_page: false
+
+# trusted by
+clients:
+  - name: 8pod
+    url: https://8pod.com
+  - name: Farm Focus
+    url: https://farmfocus.co.nz
+  - name: Forsyth Barr
+    url: https://forsythbarr.co.nz
+  - name: Jerica Global
+    url: https://jericaglobal.com
+  - name: Nui Markets
+    url: https://nuimarkets.com
+  - name: Spotlight Reporting
+    url: https://spotlightreporting.com
+  - name: Kry10
+    url: https://kry10.com

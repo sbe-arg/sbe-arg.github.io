@@ -1,0 +1,855 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* Custom styles for improved design */
+
+:root {
+  --primary-color: #157878;
+  --secondary-color: #159957;
+  --background-color: #fff;
+  --text-color: #24292e;
+  --link-color: #1e6bb8;
+  --header-bg: #f5f5f5;
+  --footer-bg: #f2f2f2;
+  --border-color: #e1e4e8;
+  --heading-color: #111111; /* Darker heading color for light mode for better readability */
+}
+
+/* Dark Mode Variables - applied with data-theme attribute or OS preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --primary-color: #2ecc71;
+    --secondary-color: #27ae60;
+    --background-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --link-color: #3498db;
+    --header-bg: #2c2c2c;
+    --footer-bg: #2c2c2c;
+    --border-color: #444;
+    --heading-color: #f0f0f0; /* Light grey heading color for dark mode for better visibility */
+  }
+}
+
+/* Dark Mode Variables - applied with data-theme attribute override */
+[data-theme="dark"] {
+  --primary-color: #2ecc71;
+  --secondary-color: #27ae60;
+  --background-color: #1a1a1a;
+  --text-color: #f0f0f0;
+  --link-color: #3498db;
+  --header-bg: #2c2c2c;
+  --footer-bg: #2c2c2c;
+  --border-color: #444;
+  --heading-color: #f0f0f0; /* Light grey heading color for dark mode for better visibility */
+}
+
+/* Override light mode heading styles for dark mode */
+[data-theme="dark"] section h1,
+[data-theme="dark"] section h2,
+[data-theme="dark"] .name-container h1,
+[data-theme="dark"] .name-container a,
+[data-theme="dark"] .tagline {
+  color: #f0f0f0; /* Light gray for all headings and tagline in dark mode */
+}
+
+/* Apply theme colors */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  padding-top: 45px; /* Add space for fixed controls at the top */
+}
+
+a {
+  color: var(--link-color);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.85;
+}
+
+header {
+  background-color: var(--header-bg);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+footer {
+  background-color: var(--footer-bg);
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 15px;
+  text-align: center;
+  border-top: none; /* Ensure no top border */
+}
+
+footer a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+footer a:hover {
+  opacity: 0.8;
+}
+
+footer p {
+  margin: 3px 0;
+}
+
+@media screen and (max-width: 480px) {
+  footer {
+    padding: 10px 8px;
+    margin-top: 12px;
+    font-size: 0.9em;
+    border: none; /* Remove all borders in mobile */
+  }
+}
+
+/* Profile Image */
+.name-container {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.name-container h1 {
+  margin-bottom: 10px;
+  color: #000000; /* Pure black for site name in light mode */
+  font-weight: 600; /* Make slightly bolder */
+}
+
+.name-container a {
+  color: #000000; /* Pure black for site name link in light mode */
+  text-decoration: none;
+}
+
+.profile-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.profile-image {
+  border-radius: 12px; /* Squared with rounded corners instead of circle */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  max-width: 220px; /* Larger on desktop */
+  width: 70%; /* Responsive width */
+  display: inline-block;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+}
+
+/* Tagline */
+.tagline {
+  text-align: center;
+  color: var(--text-color);
+  font-size: 1.1em;
+  margin: 5px 0 15px;
+  padding: 0 15px;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* Contact links */
+.contact-links a {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 2px;
+  transition: all 0.2s ease;
+}
+
+.contact-links a:hover {
+  background-color: rgba(0,0,0,0.05);
+  transform: translateX(5px);
+}
+
+.contact-links {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.contact-links i {
+  margin-right: 10px;
+  color: var(--primary-color);
+}
+
+/* Dark mode toggle */
+.theme-switch-wrapper {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  user-select: none; /* Prevent text selection on mobile */
+  touch-action: manipulation; /* Improve touch behavior */
+  background-color: var(--header-bg);
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Font size control */
+.font-control-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  gap: 5px;
+  background-color: var(--header-bg);
+  padding: 3px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.font-size-btn {
+  background-color: var(--header-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.font-size-btn:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 50px;
+  margin: 0; /* Reset margin for mobile */
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 16px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 16px;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.theme-switch-wrapper em {
+  margin-left: 10px;
+  font-size: 0.8em;
+  position: relative;
+}
+
+.theme-switch-wrapper em .toggle-text {
+  cursor: pointer;
+}
+
+.theme-switch-wrapper em .toggle-text:hover::after {
+  content: "Default: System preference";
+  position: absolute;
+  top: 25px;
+  left: 0;
+  background: var(--header-bg);
+  padding: 5px 10px;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  white-space: nowrap;
+  z-index: 1001;
+  font-size: 0.9em;
+}
+
+/* Responsive improvements */
+@media screen and (max-width: 800px) {
+  .wrapper {
+    width: 90%;
+    padding: 10px;
+    margin: 15px auto;
+  }
+  
+  header {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-bottom: none; /* Remove bottom border in mobile */
+  }
+  
+  section {
+    padding: 15px 10px;
+    border-top: none; /* Remove top border in mobile */
+  }
+  
+  /* For tablets - keep fixed position */
+  .theme-switch-wrapper {
+    top: 12px;
+    right: 12px;
+    padding: 4px;
+  }
+  
+  .font-control-wrapper {
+    top: 12px;
+    left: 12px;
+    padding: 2px;
+  }
+  
+  /* Adjust profile image for mobile */
+  .profile-container {
+    margin: 15px 0;
+  }
+  
+  .profile-image {
+    max-width: 160px;
+    width: 75%;
+    border-radius: 10px; /* Slightly smaller radius for mobile */
+  }
+  
+  /* Tagline for tablet */
+  .tagline {
+    font-size: 1em;
+    margin: 3px 0 12px;
+  }
+  
+  /* Improve contact links for touch */
+  .contact-links a {
+    padding: 8px 10px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+  }
+  
+  /* Adjust header text sizes for mobile */
+  h1 {
+    font-size: 1.8em;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+  }
+  
+  h3 {
+    font-size: 1.2em;
+  }
+  
+  /* Ensure content is readable */
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+/* Extra small devices (phones, 480px and down) */
+@media screen and (max-width: 480px) {
+  /* Body padding already added globally */
+  
+  .wrapper {
+    width: 95%;
+    padding: 8px;
+    margin: 10px auto;
+  }
+  
+  header {
+    padding: 12px;
+    border: none; /* Remove all borders */
+    box-shadow: none; /* Remove shadow to prevent divisory line effect */
+  }
+  
+  section {
+    border: none; /* Remove all borders */
+  }
+  
+  .theme-switch-wrapper {
+    top: 8px;
+    right: 10px;
+    margin: 0;
+    height: 32px;
+    padding: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .font-control-wrapper {
+    top: 8px;
+    left: 10px;
+    margin: 0;
+    gap: 3px;
+    height: 32px;
+    padding: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .font-size-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  /* Stack header content better */
+  h1 {
+    font-size: 1.6em;
+    word-wrap: break-word;
+  }
+  
+  .name-container h1, .name-container a {
+    color: var(--heading-color);
+    text-shadow: 0 1px 1px rgba(0,0,0,0.1); /* Add subtle text shadow for better visibility */
+  }
+  
+  /* Ensure heading colors are more visible in dark mode on mobile */
+  [data-theme="dark"] .name-container h1, 
+  [data-theme="dark"] .name-container a {
+    color: #f0f0f0; /* Light grey for better visibility in dark mode */
+  }
+  
+  /* Make section headings much more visible in dark mode on mobile */
+  [data-theme="dark"] section h1,
+  [data-theme="dark"] section h2,
+  [data-theme="dark"] section h3 {
+    color: #ffffff; /* Pure white for maximum contrast in section headings */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3); /* Enhanced text shadow for better readability */
+  }
+  
+  .profile-image {
+    max-width: 140px;
+    width: 80%;
+    border-radius: 8px; /* Even smaller radius for very small screens */
+  }
+  
+  /* Tagline for mobile */
+  .tagline {
+    font-size: 0.9em;
+    margin: 2px 0 10px;
+    padding: 0 10px;
+  }
+  
+  /* Extra emphasis on section headings for very small screens in dark mode */
+  [data-theme="dark"] section h1 {
+    color: #ffffff; /* Bright white for maximum contrast */
+    font-weight: 600; /* Make it slightly bolder */
+    text-shadow: 0 2px 3px rgba(0,0,0,0.4); /* Stronger shadow for better definition */
+  }
+  
+  [data-theme="dark"] section h2 {
+    color: #e6e6e6; /* Slightly off-white for secondary headings */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3); /* Moderate shadow for better definition */
+  }
+  
+  /* Adjust icons and spacing for better touch */
+  .contact-links a {
+    padding: 8px 10px;
+    margin-bottom: 1px;
+  }
+  
+  .contact-links i {
+    margin-right: 10px;
+    font-size: 1.1em;
+  }
+  
+  /* Fix the tooltip positioning */
+  .theme-switch-wrapper em .toggle-text:hover::after {
+    left: auto;
+    right: 0;
+    font-size: 0.8em;
+    width: auto;
+    white-space: normal;
+    max-width: 200px;
+  }
+}
+
+/* Handle dark mode via OS/browser preference for section headings */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) section h1,
+  :root:not([data-theme="light"]) section h2,
+  :root:not([data-theme="light"]) section h3 {
+    color: #ffffff; /* Pure white for maximum contrast in section headings */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3); /* Enhanced text shadow for better readability */
+  }
+  
+  :root:not([data-theme="light"]) section h1 {
+    font-weight: 600; /* Make it slightly bolder */
+    text-shadow: 0 2px 3px rgba(0,0,0,0.4); /* Stronger shadow for better definition */
+  }
+  
+  :root:not([data-theme="light"]) section h2 {
+    color: #e6e6e6; /* Slightly off-white for secondary headings */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3); /* Moderate shadow for better definition */
+  }
+}
+
+/* Accessibility improvements */
+a:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Enhanced light mode headings */
+section h1 {
+  color: #000000; /* Pure black for main headings in light mode */
+  font-weight: 600; /* Make slightly bolder */
+}
+
+section h2 {
+  color: #111111; /* Very dark gray for secondary headings */
+  font-weight: 500; /* Medium weight for better visibility */
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+section {
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Font size feedback */
+.font-feedback {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  opacity: 0.9;
+  transition: opacity 0.5s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Trusted By Section */
+.clients-section {
+  background-color: var(--background-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+  clear: both;
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+.clients-heading {
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  color: var(--heading-color);
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.client-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.client-link {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.02);
+  display: inline-block;
+  margin: 5px;
+}
+
+.client-link:hover {
+  color: var(--primary-color);
+  background-color: rgba(0,0,0,0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.client-separator {
+  color: var(--border-color);
+  margin: 0 2px;
+  opacity: 0.7;
+  display: inline-block;
+}
+
+/* Responsive adjustments for trusted by section */
+@media screen and (max-width: 480px) {
+  .clients-section {
+    padding: 15px 10px;
+    margin: 15px 0;
+  }
+  
+  .clients-heading {
+    font-size: 1em;
+    margin-bottom: 12px;
+  }
+  
+  .client-logos {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .client-link {
+    padding: 8px 15px;
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .client-separator {
+    display: none;
+  }
+  
+  /* Mobile quote header adjustments */
+  blockquote.quote-header {
+    font-size: 1.3rem;
+    margin: 20px auto 15px;
+    padding: 5px 15px;
+    width: 90%;
+  }
+  
+  blockquote.quote-header:before {
+    left: -5px;
+    top: -10px;
+    font-size: 1.8rem;
+  }
+  
+  blockquote.quote-header:after {
+    right: -5px;
+    bottom: -20px;
+    font-size: 1.8rem;
+  }
+}
+
+/* Page navigation */
+.page-nav {
+  margin: 0 0 35px;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.75;
+}
+
+.page-nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  margin: 0 4px;
+  padding: 3px 6px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.page-nav a:hover {
+  color: var(--primary-color);
+  background: rgba(21, 120, 120, 0.1);
+}
+
+[data-theme="dark"] .page-nav a {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .page-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--primary-color);
+}
+
+@media screen and (max-width: 42em) {
+  .page-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .page-nav a {
+    margin: 4px;
+  }
+}
+
+/* Quote-style header */
+.quote-header {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: normal;
+  color: var(--primary-color);
+  position: relative;
+  padding: 5px 10px;
+  margin: 30px auto 20px;
+  line-height: 1.5;
+  text-align: center;
+  font-size: 1.6rem;
+  border-left: none !important;
+  max-width: 800px;
+  display: block;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove default blockquote styling */
+blockquote.quote-header {
+  background: transparent;
+  border-left: none;
+  box-shadow: none;
+}
+
+blockquote.quote-header p {
+  font-style: italic;
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+blockquote.quote-header:before {
+  content: "\201C"; /* Left double quotation mark */
+  font-size: 2.2rem;
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  color: var(--primary-color);
+  opacity: 0.4;
+  font-family: Georgia, serif;
+}
+
+blockquote.quote-header:after {
+  content: "\201D"; /* Right double quotation mark */
+  font-size: 2.2rem;
+  position: absolute;
+  right: -10px;
+  bottom: -25px;
+  color: var(--primary-color);
+  opacity: 0.4;
+  font-family: Georgia, serif;
+}
+
+[data-theme="dark"] blockquote.quote-header,
+[data-theme="dark"] blockquote.quote-header p {
+  color: #88cccc;
+}
+
+[data-theme="dark"] blockquote.quote-header:before,
+[data-theme="dark"] blockquote.quote-header:after {
+  color: #88cccc;
+}
+
+/* Cookie Consent Banner Styles */
+.cookie-consent-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(21, 120, 120, 0.95);
+  color: #fff;
+  padding: 1rem;
+  z-index: 9999;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .cookie-consent-banner {
+  background-color: rgba(30, 30, 30, 0.95);
+}
+
+.cookie-consent-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cookie-consent-content h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.cookie-consent-content p {
+  margin-bottom: 1rem;
+}
+
+.cookie-consent-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cookie-btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cookie-accept {
+  background-color: #ffffff;
+  color: var(--primary-color);
+}
+
+.cookie-accept:hover {
+  background-color: #f0f0f0;
+}
+
+.cookie-reject {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+.cookie-reject:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
